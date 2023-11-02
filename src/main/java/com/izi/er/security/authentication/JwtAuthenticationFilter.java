@@ -1,4 +1,4 @@
-package com.izi.er.security.jwt;
+package com.izi.er.security.authentication;
 
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
