@@ -1,11 +1,10 @@
 package com.izi.er.security.jwt;
 
-import com.nimbusds.common.contenttype.ContentType;
 import lombok.Setter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +25,7 @@ public class JwtTokenResolver implements BearerTokenResolver {
 
     /**
      * 요청 헤더 또는 파라미터에 bearer 토큰이 있으면 해당 토큰을 반환한다.
-     * 토큰으로 추정되는 문자열이 두 개 이상 발견되면 {@link OAuth2AuthenticationException} 예외를 던진다.
+     * 토큰으로 추정되는 문자열이 두 개 이상 발견되면 {@link JwtTokenAuthenticationException} 예외를 던진다.
      * 토큰으로 추정되는 문자열이 발견되지 않으면 {@code null}을 반환한다.
      * @param request HttpServletRequest 객체
      * @return bearer 토큰 또는 null
@@ -38,7 +37,7 @@ public class JwtTokenResolver implements BearerTokenResolver {
 
         if (authenticationHeaderToken != null) {
             if (authenticationParameterToken != null) {
-                throw new OAuth2AuthenticationException("multiple bearer tokens in the request");
+                throw new JwtTokenAuthenticationException("multiple bearer tokens in the request");
             }
             return authenticationHeaderToken;
         } else if (authenticationParameterToken != null) {
@@ -66,7 +65,7 @@ public class JwtTokenResolver implements BearerTokenResolver {
         if (!matcher.matches()) {
             return null;
         }
-        return matcher.group();
+        return matcher.group("token");
     }
 
     /**
@@ -85,16 +84,16 @@ public class JwtTokenResolver implements BearerTokenResolver {
      * 정확히 하나라면 해당 문자열을 반환한다.
      * @param request {@link HttpServletRequest} 객체
      * @return String 토큰에 해당하는 문자열
-     * @throws OAuth2AuthenticationException 토큰으로 추정되는 문자열이 둘 이상일 경우 예외 발생
+     * @throws JwtTokenAuthenticationException 토큰으로 추정되는 문자열이 둘 이상일 경우 예외 발생
      */
-    private static String resolveFromAuthorizationParameter(HttpServletRequest request) throws OAuth2AuthenticationException {
+    private static String resolveFromAuthorizationParameter(HttpServletRequest request) throws AuthenticationException {
         String[] values = request.getParameterValues(ACCESS_TOKEN_PARAMETER_NAME);
         if (values == null || values.length == 0) {
             return null;
         } else if (values.length == 1) {
             return values[0];
         }
-        throw new OAuth2AuthenticationException("multiple bearer tokens in the request");
+        throw new JwtTokenAuthenticationException("multiple bearer tokens in the request");
     }
 
     /**
