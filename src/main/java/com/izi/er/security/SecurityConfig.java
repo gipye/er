@@ -1,6 +1,7 @@
 package com.izi.er.security;
 
 import com.izi.er.security.authentication.JwtAuthenticationFilter;
+import com.izi.er.security.authentication.JwtAuthenticationProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -23,8 +24,8 @@ public class SecurityConfig {
                 .addFilterBefore(new JwtAuthenticationFilter(authenticationConfiguration.getAuthenticationManager()), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-//    @Bean
-//    public AuthenticationProvider providerManager() {
-//        return new JwtAuthenticationProvider();
-//    }
+    @Bean
+    public JwtAuthenticationProvider jwtAuthenticationProvider() {
+        return new JwtAuthenticationProvider();
+    }
 }
