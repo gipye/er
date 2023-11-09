@@ -1,13 +1,11 @@
 package com.izi.er.user.ordinary;
 
 import com.izi.er.user.User;
-import com.izi.er.user.hospital.HospitalUser;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Timestamp;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class OrdinaryUserTest {
     @Test
@@ -32,10 +30,10 @@ public class OrdinaryUserTest {
         OrdinaryUser cloneUser = ordinaryUser.clone();
 
         // 복사된 객체는 서로 주소가 달라야 한다.
-        assertFalse(cloneUser == ordinaryUser);
+        assertNotSame(cloneUser, ordinaryUser);
 
         // 복사된 객체의 참조 또한 주소가 달라야 한다.
-        assertFalse(cloneUser.getUser() == ordinaryUser.getUser());
+        assertNotSame(cloneUser.getUser(), ordinaryUser.getUser());
 
         // 주소는 달라도 정보는 같아야 한다.
         assertTrue(cloneUser.equals(ordinaryUser));

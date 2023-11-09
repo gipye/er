@@ -20,7 +20,7 @@ public class UserTest {
         User cloneUser = user.clone();
 
         // 복사된 객체의 주소는 달라야 하고, 담고 있는 정보는 같아야 한다.
-        assertFalse(cloneUser == user);
+        assertNotSame(cloneUser, user);
         assertTrue(cloneUser.equals(user));
     }
 }

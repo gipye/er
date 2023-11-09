@@ -86,6 +86,6 @@ public class JwtTest {
         jwt2.setIssuedAt(new Date(3032475986863L));
 
         Assertions.assertEquals(jwt1, jwt2);
-        Assertions.assertFalse(jwt1 == jwt2);
+        Assertions.assertNotSame(jwt1, jwt2);
     }
 }

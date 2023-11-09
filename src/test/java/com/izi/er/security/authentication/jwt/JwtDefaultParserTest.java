@@ -15,7 +15,7 @@ public class JwtDefaultParserTest {
         JwtDecoder decoder = new DefaultJwtDecoder(algorithm, key);
 
         Jwt jwt = new Jwt();
-        jwt.setAlgorithm("HMAC_SHA256");
+        jwt.setAlgorithm(SignatureAlgorithm.HS256.getValue());
         jwt.setIssuer("server");
         jwt.setSubject("test_token");
         jwt.setAudience("test_user");
@@ -28,5 +28,9 @@ public class JwtDefaultParserTest {
         Jwt decodedJwt = decoder.decode(token);
 
         Assertions.assertEquals(jwt, decodedJwt);
+        Assertions.assertNotSame(jwt, decodedJwt);
+
+        decodedJwt.setExpiration(new Date(1L));
+        Assertions.assertNotEquals(jwt, decodedJwt);
     }
 }
