@@ -10,6 +10,8 @@ public class JwtTokenAuthenticationToken extends AbstractAuthenticationToken {
 
     private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
+    private final Object credentials;
+
     private final String token;
 
     /**
@@ -17,9 +19,10 @@ public class JwtTokenAuthenticationToken extends AbstractAuthenticationToken {
      *
      * @param token jwt 토큰 문자열
      */
-    public JwtTokenAuthenticationToken(String token) {
+    public JwtTokenAuthenticationToken(Object credentials, String token) {
         super(Collections.emptyList());
         Assert.hasText(token, "token cannot be empty");
+        this.credentials = credentials;
         this.token = token;
     }
 

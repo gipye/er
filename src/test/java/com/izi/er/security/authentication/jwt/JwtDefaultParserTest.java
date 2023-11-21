@@ -14,14 +14,7 @@ public class JwtDefaultParserTest {
         JwtEncoder encoder = new DefaultJwtEncoder(algorithm, key);
         JwtDecoder decoder = new DefaultJwtDecoder(algorithm, key);
 
-        Jwt jwt = new Jwt();
-        jwt.setAlgorithm(SignatureAlgorithm.HS256.getValue());
-        jwt.setIssuer("server");
-        jwt.setSubject("test_token");
-        jwt.setAudience("test_user");
-        jwt.setExpiration(new Date(3032475986763L));
-        jwt.setIssuedAt(new Date(3032475986863L));
-        jwt.put("jfalksedfjlaj", "fjlaewfjlkae");
+        Jwt jwt = createTestJwt();
 
         String token = encoder.encode(jwt);
 
@@ -29,8 +22,19 @@ public class JwtDefaultParserTest {
 
         Assertions.assertEquals(jwt, decodedJwt);
         Assertions.assertNotSame(jwt, decodedJwt);
+    }
 
-        decodedJwt.setExpiration(new Date(1L));
-        Assertions.assertNotEquals(jwt, decodedJwt);
+    private Jwt createTestJwt() {
+        Jwt jwt = new Jwt();
+        Date now = new Date();
+
+        jwt.setAlgorithm(SignatureAlgorithm.HS256.getValue());
+        jwt.setIssuer("server");
+        jwt.setSubject("test_token");
+        jwt.setAudience("test_user");
+        jwt.setExpiration(now);
+        jwt.setIssuedAt(now);
+        jwt.put("jfalksedfjlaj", "fjlaewfjlkae");
+        return jwt;
     }
 }

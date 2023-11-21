@@ -54,7 +54,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        JwtTokenAuthenticationToken authentication = new JwtTokenAuthenticationToken(token);
+        JwtTokenAuthenticationToken authentication = new JwtTokenAuthenticationToken(null, token);
         authentication.setDetails(this.authenticationDetailsSource.buildDetails(request));
 
         // AuthenticationManager를 통해 jwt 토큰으로 구성한 Authentication 객체에 대한 인증을 수행한다.

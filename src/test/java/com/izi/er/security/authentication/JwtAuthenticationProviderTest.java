@@ -13,23 +13,33 @@ import java.util.Date;
 
 public class JwtAuthenticationProviderTest {
     private static final SignatureAlgorithm algorithm = SignatureAlgorithm.HS256;
-    private static final String key = "testkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkey";
+    private static final String key = "testkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytes" +
+            "tkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkey";
     @Test
-    public void authencateTest() {
+    public void authenticateTest() {
         JwtAuthenticationProvider provider = new JwtAuthenticationProvider(new DefaultJwtDecoder(algorithm, key));
         JwtEncoder jwtEncoder = new DefaultJwtEncoder(algorithm, key);
 
-        String token = null;
+        Jwt jwt = createTestJwt();
+        String token = jwtEncoder.encode(jwt);
+        Authentication authentication = new JwtTokenAuthenticationToken(null, token);
+
+        Authentication authenticatedAuthentication = provider.authenticate(authentication);
+
+        Assertions.assertTrue(authenticatedAuthentication.isAuthenticated());
+    }
+
+    private Jwt createTestJwt() {
         Jwt jwt = new Jwt();
+        Date now = new Date();
+
         jwt.setAlgorithm(SignatureAlgorithm.HS256.getValue());
         jwt.setIssuer("server");
         jwt.setSubject("test_token");
         jwt.setAudience("test_user");
-        jwt.setExpiration(new Date(3032475986763L));
-        jwt.setIssuedAt(new Date(3032475986863L));
+        jwt.setExpiration(now);
+        jwt.setIssuedAt(now);
         jwt.put("jfalksedfjlaj", "fjlaewfjlkae");
-
-        token = jwtEncoder.encode(jwt);
-        Authentication authentication = new JwtTokenAuthenticationToken(token);
+        return jwt;
     }
 }
