@@ -8,6 +8,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 
 import java.util.Date;
 
@@ -27,6 +28,19 @@ public class JwtAuthenticationProviderTest {
         Authentication authenticatedAuthentication = provider.authenticate(authentication);
 
         Assertions.assertTrue(authenticatedAuthentication.isAuthenticated());
+    }
+
+    @Test
+    public void expirationTest() {
+        JwtAuthenticationProvider provider = new JwtAuthenticationProvider(new DefaultJwtDecoder(algorithm, key));
+        JwtEncoder jwtEncoder = new DefaultJwtEncoder(algorithm, key);
+
+        Jwt jwt = createTestJwt();
+        jwt.setExpiration(new Date(10L));
+        String token = jwtEncoder.encode(jwt);
+        Authentication authentication = new JwtTokenAuthenticationToken(null, token);
+
+        Assertions.assertThrows(AuthenticationException.class, () -> provider.authenticate(authentication));
     }
 
     private Jwt createTestJwt() {

@@ -1,6 +1,7 @@
 package com.izi.er.security.authentication.jwt;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -15,9 +16,14 @@ public class DefaultJwtDecoder implements JwtDecoder {
     }
     @Override
     public Jwt decode(String token) throws JwtProcessingException {
-        Claims claims = Jwts.parser()
-                .setSigningKey(key)
-                .parseClaimsJws(token).getBody();
+        Claims claims;
+        try {
+            claims = Jwts.parser()
+                    .setSigningKey(key)
+                    .parseClaimsJws(token).getBody();
+        } catch (ExpiredJwtException e) {
+            throw new JwtProcessingException(e);
+        }
 
         Jwt jwt = new Jwt();
         jwt.addClaims(claims);
