@@ -1,5 +1,6 @@
-package com.izi.er.security.authentication.jwt;
+package com.izi.er.security.authentication.jwt.parser;
 
+import com.izi.er.security.authentication.jwt.Jwt;
 import com.izi.er.security.authentication.jwt.parser.DefaultJwtDecoder;
 import com.izi.er.security.authentication.jwt.parser.DefaultJwtEncoder;
 import com.izi.er.security.authentication.jwt.parser.JwtDecoder;

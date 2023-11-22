@@ -1,4 +1,4 @@
-package com.izi.er.security.authentication;
+package com.izi.er.security.authentication.jwt;
 
 import com.izi.er.security.authentication.jwt.JwtAuthenticationProvider;
 import com.izi.er.security.authentication.jwt.JwtTokenAuthenticationToken;
