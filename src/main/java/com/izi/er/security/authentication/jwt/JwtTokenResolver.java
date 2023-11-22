@@ -1,5 +1,6 @@
-package com.izi.er.security.authentication;
+package com.izi.er.security.authentication.jwt;
 
+import com.izi.er.security.authentication.BearerTokenResolver;
 import lombok.Setter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;

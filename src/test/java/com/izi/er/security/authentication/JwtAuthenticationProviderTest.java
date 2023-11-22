@@ -1,9 +1,11 @@
 package com.izi.er.security.authentication;
 
-import com.izi.er.security.authentication.jwt.DefaultJwtDecoder;
-import com.izi.er.security.authentication.jwt.DefaultJwtEncoder;
+import com.izi.er.security.authentication.jwt.JwtAuthenticationProvider;
+import com.izi.er.security.authentication.jwt.JwtTokenAuthenticationToken;
+import com.izi.er.security.authentication.jwt.parser.DefaultJwtDecoder;
+import com.izi.er.security.authentication.jwt.parser.DefaultJwtEncoder;
 import com.izi.er.security.authentication.jwt.Jwt;
-import com.izi.er.security.authentication.jwt.JwtEncoder;
+import com.izi.er.security.authentication.jwt.parser.JwtEncoder;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

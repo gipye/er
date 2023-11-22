@@ -1,4 +1,4 @@
-package com.izi.er.security.authentication.jwt;
+package com.izi.er.security.authentication.jwt.parser;
 
 public class JwtProcessingException extends RuntimeException {
     public JwtProcessingException() {

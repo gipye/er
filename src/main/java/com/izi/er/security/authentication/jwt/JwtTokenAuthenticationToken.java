@@ -1,4 +1,4 @@
-package com.izi.er.security.authentication;
+package com.izi.er.security.authentication.jwt;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.SpringSecurityCoreVersion;

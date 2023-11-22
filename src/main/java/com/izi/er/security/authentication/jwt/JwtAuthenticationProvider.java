@@ -1,9 +1,8 @@
-package com.izi.er.security.authentication;
+package com.izi.er.security.authentication.jwt;
 
-import com.izi.er.security.authentication.jwt.DefaultJwtDecoder;
-import com.izi.er.security.authentication.jwt.Jwt;
-import com.izi.er.security.authentication.jwt.JwtDecoder;
-import com.izi.er.security.authentication.jwt.JwtProcessingException;
+import com.izi.er.security.authentication.jwt.parser.DefaultJwtDecoder;
+import com.izi.er.security.authentication.jwt.parser.JwtDecoder;
+import com.izi.er.security.authentication.jwt.parser.JwtProcessingException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

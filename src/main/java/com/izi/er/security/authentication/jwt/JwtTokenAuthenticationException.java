@@ -1,4 +1,4 @@
-package com.izi.er.security.authentication;
+package com.izi.er.security.authentication.jwt;
 
 import org.springframework.security.core.AuthenticationException;
 

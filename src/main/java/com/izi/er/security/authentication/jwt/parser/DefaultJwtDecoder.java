@@ -1,5 +1,6 @@
-package com.izi.er.security.authentication.jwt;
+package com.izi.er.security.authentication.jwt.parser;
 
+import com.izi.er.security.authentication.jwt.Jwt;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;

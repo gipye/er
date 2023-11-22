@@ -1,7 +1,7 @@
 package com.izi.er.security;
 
-import com.izi.er.security.authentication.JwtAuthenticationFilter;
-import com.izi.er.security.authentication.JwtAuthenticationProvider;
+import com.izi.er.security.authentication.jwt.JwtAuthenticationFilter;
+import com.izi.er.security.authentication.jwt.JwtAuthenticationProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
